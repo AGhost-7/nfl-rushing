@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@koa/router": "^9.3.1",
+    "csv-stringify": "^5.5.0",
+    "knex": "^0.21.2",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "objection": "^2.2.1",
+    "pg": "^8.3.0",
+    "pg-query-stream": "^3.2.0"
+  },
+  "bin": {
+    "nfl-rushing": "./bin/server"
+  },
+  "type": "module",
+  "main": "./lib/server.mjs",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "import": "./bin/import.mjs",
+    "format": "prettier --write '**/*.{js,cjs}'",
+    "knex": "knex --knexfile knexfile.cjs $@",
+		"server": "./bin/server.js"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-plugin-react": "^7.20.3",
+    "mocha": "^8.0.1",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "supertest": "^4.0.2",
+    "webpack": "^4.43.0"
+  }
+}

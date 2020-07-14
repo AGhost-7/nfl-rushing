@@ -1,0 +1,5 @@
+version: "3.7"
+services:
+  db:
+    image: aghost7/pg-dev:12
+    network_mode: host
