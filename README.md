@@ -54,4 +54,36 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO
+
+#### Requirements
+- nvm
+- yarn
+- docker-compose
+
+#### Steps
+
+Bring up the database:
+```bash
+docker-compose up -d
+```
+
+Download the correct nodejs version:
+```bash
+nvm install
+```
+
+Install dependencies:
+```bash
+yarn
+```
+
+Spin up the server:
+```bash
+yarn server
+```
+
+In a different terminal, run:
+```bash
+nvm use
+yarn client
+```

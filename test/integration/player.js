@@ -1,9 +1,9 @@
-import assert from "assert"
-import supertest from "supertest"
-import config from "../../lib/config.js"
-import Server from "../../lib/server.js"
+import assert from 'assert'
+import supertest from 'supertest'
+import config from '../../lib/config.js'
+import Server from '../../lib/server.js'
 
-describe("integration#player", () => {
+describe('integration#player', () => {
   const server = new Server(config)
   let address, agent
 
@@ -13,41 +13,41 @@ describe("integration#player", () => {
   })
   after(() => server.stop())
 
-  describe("list", () => {
+  describe('list', () => {
     const assertDescending = (records, key) => {
       for (let i = 0; i < records.length - 1; i++) {
         assert(records[i][key] >= records[i + 1][key])
       }
     }
 
-    it("returns a list of players", async () => {
-      const response = await agent.get("/api/players").expect(200)
+    it('returns a list of players', async () => {
+      const response = await agent.get('/api/players').expect(200)
 
       assert(Array.isArray(response.body))
       assert.equal(response.body.length, 20)
-      assertDescending(response.body, "totalRushingYards")
+      assertDescending(response.body, 'totalRushingYards')
     })
 
-    it("sorts", async () => {
+    it('sorts', async () => {
       const response = await agent
-        .get("/api/players?sort=longestRush&order=desc")
+        .get('/api/players?sort=longestRush&order=desc')
         .expect(200)
-      assertDescending(response.body, "longestRush")
+      assertDescending(response.body, 'longestRush')
     })
 
-    it("allows sorting on multiple fields", async () => {
+    it('allows sorting on multiple fields', async () => {
       const response = await agent
         .get(
-          "/api/players?sort=longestRush&sort=longestRushTouchdown&order=desc&order=desc"
+          '/api/players?sort=longestRush&sort=longestRushTouchdown&order=desc&order=desc'
         )
         .expect(200)
-      assertDescending(response.body, "longestRush")
+      assertDescending(response.body, 'longestRush')
     })
 
-    it("handles different pages", async () => {
-      const { body: pageOne } = await agent.get("/api/players").expect(200)
+    it('handles different pages', async () => {
+      const { body: pageOne } = await agent.get('/api/players').expect(200)
       const { body: pageTwo } = await agent
-        .get("/api/players?page=2")
+        .get('/api/players?page=2')
         .expect(200)
 
       for (const pageOneItem of pageOne) {
@@ -59,19 +59,19 @@ describe("integration#player", () => {
     })
   })
 
-  describe("export", () => {
+  describe('export', () => {
     let data
-    before("fetch csv", async () => {
-      const response = await agent.get("/api/players/export").expect(200)
+    before('fetch csv', async () => {
+      const response = await agent.get('/api/players/export').expect(200)
       data = response.body.toString()
     })
 
-    it("contains the headers", () => {
-      const lines = data.split("\n")
-      assert(lines[0].includes("Player"))
+    it('contains the headers', () => {
+      const lines = data.split('\n')
+      assert(lines[0].includes('Player'))
     })
 
-    it("contains player names", () => {
+    it('contains player names', () => {
       assert(/Johnny/.test(data))
     })
   })

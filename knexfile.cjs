@@ -4,6 +4,6 @@
  */
 
 module.exports = async () => {
-  const config = await import("./lib/config.js")
+  const config = await import('./lib/config.js')
   return config.default.db
 }
