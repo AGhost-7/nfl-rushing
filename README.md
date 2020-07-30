@@ -55,35 +55,9 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 ### Installation and running this solution
 
-#### Requirements
-- nvm
-- yarn
-- docker-compose
-
-#### Steps
-
-Bring up the database:
+Bring up the application and database:
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.demo.yml up -d
 ```
 
-Download the correct nodejs version:
-```bash
-nvm install
-```
-
-Install dependencies:
-```bash
-yarn
-```
-
-Spin up the server:
-```bash
-yarn server
-```
-
-In a different terminal, run:
-```bash
-nvm use
-yarn client
-```
+Open your browser to `http://localhost:8000`.
